@@ -1,0 +1,12 @@
+---
+- hosts: SWITCH
+  connection: network_cli
+  gather_facts: no
+
+  tasks:
+
+   - name: check the running-config against default config
+     ios_config:
+       diff_against: intended
+       intended_config: "{{ lookup('file', 'backup.txt') }}"
+       
